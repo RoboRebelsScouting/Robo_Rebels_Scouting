@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<!--<?import com.walpolerobotics.scouting.view.RobotOverviewController?>-->
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="1215.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.walpolerobotics.scouting.view.RobotOverviewController">
+  <children>
+    <SplitPane dividerPositions="0.6776586974443528" focusTraversable="true" prefHeight="-1.0" prefWidth="1215.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <items>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="531.0">
+          <children>
+            <TableView fx:id="robotTable" prefHeight="445.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-81.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Robot Number" fx:id="robotNumberColumn" />
+                <TableColumn id="HighGoalsScoredColumn" maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="High Goals" fx:id="highGoalsScoredColumn" />
+                <TableColumn prefWidth="75.0" text="Low Goals" fx:id="lowGoalsScoredColumn" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="113.0" text="Defenses Crossed" fx:id="defensesCrossedColumn" />
+                <TableColumn prefWidth="75.0" text="Auto BP" fx:id="autoBPColumn" />
+                <TableColumn prefWidth="75.0" text="Climbed" fx:id="climbedColumn" />
+                <TableColumn prefWidth="75.0" text="Wins" fx:id="winsColumn" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="99.0" text="Area Of Focus" fx:id="areaOfFocusColumn" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="110.0" text="Shooting Accuracy" fx:id="shootingAccuracyColumn" />
+              </columns>
+            </TableView>
+          </children>
+        </AnchorPane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="439.0" prefWidth="272.0">
+          <children>
+            <Label layoutX="6.0" layoutY="7.0" prefHeight="24.0" prefWidth="80.0" text="Robot Details" />
+            <GridPane layoutX="24.0" layoutY="29.0" prefHeight="168.0" prefWidth="260.0">
+              <children>
+                <Label prefHeight="24.0" prefWidth="100.0" text="Robot Number" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Goals Scored" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Low Goals Scored" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Defenses Crossed" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label fx:id="robotNumberLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label fx:id="highGoalsScoredLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label id="defensesCrossedLabel" fx:id="lowGoalsScoredLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="defensesCrossedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Auto BP" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="autoBPLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Climbed" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label fx:id="climbedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label text="\% Wins" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <Label fx:id="winsLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label text="Area Of Focus" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <Label fx:id="areaOfFocusLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label text="Shooting Accuracy" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <Label fx:id="shootingAccuracyLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="204.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="78.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Button layoutX="168.0" layoutY="404.0" mnemonicParsing="false" text="edit" />
+            <Button layoutX="240.0" layoutY="404.0" mnemonicParsing="false" text="delete" />
+            <Button layoutX="97.0" layoutY="404.0" mnemonicParsing="false" text="new" />
+            <GridPane layoutX="14.0" layoutY="243.0" prefWidth="151.0">
+              <children>
+                <Label text="Drawbridge" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Portcullis" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label id="drawBridgesCrossedLabel" fx:id="drawbridgesCrossedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label fx:id="moatsCrossedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="portcullisCrossedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Moat" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Low Bar" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label text="Wall" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="lowBarsCrossedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label fx:id="wallsCrossedLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label layoutX="7.0" layoutY="226.0" text="Defenses Crossed" />
+            <GridPane layoutX="174.0" layoutY="243.0">
+              <children>
+                <Label text="Captured" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Climbed" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Breached" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <Label layoutX="168.0" layoutY="226.0" text="End Game" />
+          </children>
+        </AnchorPane>
+      </items>
+    </SplitPane>
+  </children>
+</AnchorPane>
