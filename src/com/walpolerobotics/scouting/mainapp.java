@@ -10,17 +10,13 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import com.walpolerobotics.scouting.model.Robot;
-
-import java.io.File;
 
 public class mainapp extends Application {
     private Stage primaryStage;
@@ -202,6 +198,93 @@ public class mainapp extends Application {
             e.printStackTrace();
         }
     }
+
+    public void databaseExporter(File file){
+        try{
+            FileWriter writer = new FileWriter(file);
+            for (Robot r : this.getRobotData()){
+                String outputString = "robot";
+                outputString += "," + r.getRobotNumber();
+                outputString += "," + r.getHighGoalsScored();
+                outputString += "," + r.getLowGoalsScored();
+                outputString += "," + r.getDefensesCrossed();
+                outputString += "," + r.getAutoBP();
+                outputString += "," + r.getClimbed();
+                outputString += "," + r.getWins();
+                outputString += "," + r.getAreaOfFocus();
+                outputString += "," + r.getShootingAccuracy();
+
+                writer.write(outputString + "\n");
+            }
+            writer.close();
+        } catch (IOException e){
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Could not save data");
+            alert.setContentText("Could not save data to file:\n" + file.getPath());
+
+            alert.showAndWait();
+        }
+
+
+    }
+
+    public void databaseImportExporter(File file) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+
+            Robot r = new Robot();
+            int lineCount = 0;
+            int robotNumber = 0;
+            int highGoalsScored = 0;
+            int highGoalsShot = 0;
+            int lowGoalsScored = 0;
+            int defensesCrossed = 0;
+            int autoBP = 0;
+            int climbed = 0;
+            int wins = 0;
+            String areaOfFocus = "null";
+            int shootingAccuracy = 0;
+            int moatsCrossed = 0;
+            int drawbridgesCrossed = 0;
+            int portcullisCrossed = 0;
+            int lowBarsCrossed = 0;
+            int wallsCrossed = 0;
+
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                String[] lineList = line.split(",");
+
+                robotNumber = Integer.parseInt(lineList[2]);
+                highGoalsScored = Integer.parseInt(lineList[3]);
+                lowGoalsScored = Integer.parseInt(lineList[4]);
+                defensesCrossed = Integer.parseInt(lineList[5]);
+                autoBP = Integer.parseInt(lineList[6]);
+                climbed = Integer.parseInt(lineList[7]);
+                wins = Integer.parseInt(lineList[8]);
+                areaOfFocus = lineList[9];
+                shootingAccuracy = Integer.parseInt(lineList[10]);
+
+                r.setRobotNumber(robotNumber);
+                r.setHighGoalsScored(highGoalsScored);
+                r.setShootingAccuracy(shootingAccuracy);
+                r.setDefensesCrossed(defensesCrossed);
+                r.setLowGoalsScored(lowGoalsScored);
+                r.setAutoBP(autoBP);
+                r.setClimbed(climbed);
+                r.setWins(wins);
+                r.setAreaOfFocus(areaOfFocus);
+                robotData.add(r);
+
+
+            }
+        }catch (IOException e) {
+            e.printStackTrace();}}
+
+
+
 
     public Stage getPrimaryStage() {
         return primaryStage;
