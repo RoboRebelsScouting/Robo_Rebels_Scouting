@@ -5,6 +5,8 @@ package com.walpolerobotics.scouting.model;
  */
 import javafx.beans.property.*;
 
+import java.util.ArrayList;
+
 
 public class Robot {
     private final IntegerProperty robotNumber;
@@ -21,11 +23,13 @@ public class Robot {
     private final IntegerProperty portcullisCrossed;
     private final IntegerProperty lowBarsCrossed;
     private final IntegerProperty wallsCrossed;
+    public ArrayList<RobotMatch> robotMatch;
 
 
 
     public Robot() {
         this(0, 0, 0, 0, 0, 0, 0, null, 0, 0, 0, 0, 0, 0);
+        robotMatch = new ArrayList<RobotMatch>();
 
     }
 //ordering the variables *****don't forget to add to the int line)
