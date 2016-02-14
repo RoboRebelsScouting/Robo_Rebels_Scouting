@@ -1,5 +1,7 @@
 package com.walpolerobotics.scouting.model;
 
+import javafx.beans.property.StringProperty;
+
 /**
  * Created by 1153 on 2/11/2016.
  */
@@ -13,5 +15,8 @@ public class RobotMatchData {
    public String allianceColor;
 
 
+ }
 
-}
+
+
+

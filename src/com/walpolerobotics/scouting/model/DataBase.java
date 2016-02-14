@@ -53,6 +53,26 @@ public class DataBase {
                 ss +=      ");";
 
                 stmt.execute(ss);
+                for (RobotMatchData rmd : rm.getEventList()){
+                    try {
+                        stmt = con.createStatement();
+                        String st = "INSERT INTO matchdata (RobotNumber, gameEvent, subEvent, timeStamp, firstCompetition)\nVALUES\n(" + rmd.robotNumber;
+                        st += ", \"" + rmd.gameEvent + "\"";
+                        st += ", \"" + rmd.subEvent + "\"";
+                        st += ", \"" + rmd.timeStamp + "\"";
+                        st += ", \"" + rmd.firstCompetition + "\"";
+
+
+                        st += ");";
+
+                        stmt.execute(st);
+                    }catch (SQLException ex) {
+                        System.out.println("SQLException: " + ex.getMessage());
+
+                    }
+                }
+
+
                 //System.out.println(ss);
 
             }

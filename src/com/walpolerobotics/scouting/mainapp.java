@@ -125,7 +125,7 @@ public class mainapp extends Application {
                         default:
                             rmd.gameEvent = lineList[1];
                             if (lineList.length>2){
-                            rmd.subEvent = lineList[2];}
+                                rmd.subEvent = lineList[2];}
                     }
                    rm.getEventList().add(rmd);
                 }
