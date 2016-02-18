@@ -6,16 +6,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="1210.9998779296875" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.walpolerobotics.scouting.view.RootLayoutController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="780.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.walpolerobotics.scouting.view.RootLayoutController">
   <top>
     <MenuBar>
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#exportMysql" text="Export to MySQL" />
-            <MenuItem mnemonicParsing="false" onAction="#databaseImportExporter" text="Import the Exported" />
             <MenuItem mnemonicParsing="false" onAction="#handleImport" text="Import Robot CSV" />
-            <MenuItem mnemonicParsing="false" onAction="#databaseExporter" text="Export CSV" />
+            <MenuItem mnemonicParsing="false" onAction="#exportMysql" text="Export to MySQL" />
             <MenuItem mnemonicParsing="false" text="Close" />
           </items>
         </Menu>

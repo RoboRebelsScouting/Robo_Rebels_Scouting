@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
  */
 public class RobotMatchData {
    public String timeStamp;
+   public String phaseOfMatch;
    public String gameEvent;
    public String subEvent;
    public String matchNumber;

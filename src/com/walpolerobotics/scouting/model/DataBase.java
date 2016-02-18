@@ -39,36 +39,62 @@ public class DataBase {
 
     public void writeRobotToDB (Robot r){
         Statement stmt = null;
+        ResultSet rs = null;
 
         for (RobotMatch rm : r.robotMatch){
             try{
                 stmt = con.createStatement();
-                String ss = "INSERT INTO matchTable (RobotNumber, firstCompetition, matchNumber, allianceColor, scouterName )\nVALUES\n(" + rm.getRobotNumber();
-                ss += ", \"" + rm.getFirstCompetition() + "\"";
-                ss += ", \"" + rm.getMatchNumber() + "\"";
-                ss += ", \"" + rm.getAllianceColor() + "\"";
-                ss += ", \"" + rm.getScouterName() + "\"";
+                String ss = "SELECT * FROM matchTable;";
+
+                rs = stmt.executeQuery(ss);
+                Boolean dataExists = false;
 
 
-                ss +=      ");";
+                while (rs.next()){
+                    Integer RobotNumber = rs.getInt("RobotNumber");
+                    String FirstCompetition = rs.getString("FirstCompetition");
+                    String MatchNumber = rs.getString("MatchNumber");
+                    String AllianceColor = rs.getString("AllianceColor");
+                    String ScouterName = rs.getString("ScouterName");
 
-                stmt.execute(ss);
-                for (RobotMatchData rmd : rm.getEventList()){
-                    try {
-                        stmt = con.createStatement();
-                        String st = "INSERT INTO matchdata (RobotNumber, gameEvent, subEvent, timeStamp, firstCompetition)\nVALUES\n(" + rmd.robotNumber;
-                        st += ", \"" + rmd.gameEvent + "\"";
-                        st += ", \"" + rmd.subEvent + "\"";
-                        st += ", \"" + rmd.timeStamp + "\"";
-                        st += ", \"" + rmd.firstCompetition + "\"";
+                    if ((RobotNumber.intValue()==rm.getRobotNumber().intValue())&&(FirstCompetition.equals(rm.getFirstCompetition()))&&(MatchNumber.equals(rm.getMatchNumber()))&&(AllianceColor.equals(rm.getAllianceColor()))&&(ScouterName.equals(rm.getScouterName()))){
+                        dataExists = true;
+                    }
+                }
+
+                if (dataExists!=true) {
+                    stmt = con.createStatement();
+                    ss = "INSERT INTO matchTable (RobotNumber, firstCompetition, matchNumber, allianceColor, scouterName )\nVALUES\n(" + rm.getRobotNumber();
+                    ss += ", \"" + rm.getFirstCompetition() + "\"";
+                    ss += ", \"" + rm.getMatchNumber() + "\"";
+                    ss += ", \"" + rm.getAllianceColor() + "\"";
+                    ss += ", \"" + rm.getScouterName() + "\"";
 
 
-                        st += ");";
+                    ss += ");";
 
-                        stmt.execute(st);
-                    }catch (SQLException ex) {
-                        System.out.println("SQLException: " + ex.getMessage());
+                    stmt.execute(ss);
 
+                    for (RobotMatchData rmd : rm.getEventList()) {
+                        try {
+                            stmt = con.createStatement();
+
+                            //;
+                            String st = "INSERT INTO matchdata (RobotNumber, phaseOfMatch, gameEvent, subEvent, timeStamp, firstCompetition)\nVALUES\n(" + rmd.robotNumber;
+                            st += ", \"" + rmd.phaseOfMatch + "\"";
+                            st += ", \"" + rmd.gameEvent + "\"";
+                            st += ", \"" + rmd.subEvent + "\"";
+                            st += ", \"" + rmd.timeStamp + "\"";
+                            st += ", \"" + rmd.firstCompetition + "\"";
+
+
+                            st += ");";
+
+                            stmt.execute(st);
+                        } catch (SQLException ex) {
+                            System.out.println("SQLException: " + ex.getMessage());
+
+                        }
                     }
                 }
 

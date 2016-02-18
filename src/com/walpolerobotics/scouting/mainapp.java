@@ -25,32 +25,21 @@ public class mainapp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Robot> robotData = FXCollections.observableArrayList();
+    private ObservableList<RobotMatch> robotMatchInfo = FXCollections.observableArrayList();
 
-    protected final String SHOOTHIGH = "ShootHigh";
-    protected final String MISS = "Miss";
-    protected final String SCORE = "Score";
+
     protected final String DEFENSE = "Defense";
-    protected final String MOAT = "Moat";
-    protected final String DRAWBRIDGE = "Drawbridge";
-    protected final String PORTCULLIS = "Portcullis";
-    protected final String LOWBAR = "LowBar";
-    protected final String WALL = "Wall";
+    protected final String STARTTELE = "EnterTeleop";
+
     public DataBase db;
 
-    //add new robots (and practice information)
-    public mainapp() {
 
-        /*robotData.add(new Robot(8976, 7, 3, 72, 7, 3, 5, "shooting", 0, 0, 0, 0, 0, 0));
-        robotData.add(new Robot(2946, 6, 2, 2, 2, 4, 6, "defense", 0, 0, 0, 0, 0, 0));
-        robotData.add(new Robot(9374, 3, 4, 7, 3, 5, 2, "shooting", 0, 0, 0, 0, 0, 0));
-        robotData.add(new Robot(1998, 9, 8, 9, 8, 6, 9, "defenses", 0, 0, 0, 0, 0, 0));
-        robotData.add(new Robot(1999, 1, 5, 9, 9, 7, 7, "shooting", 0, 0, 0, 0, 0, 0));*/
-
-
-    }
 
     public ObservableList<Robot> getRobotData() {
         return robotData;
+    }
+    public ObservableList<RobotMatch> getRobotMatchInfo() {
+        return robotMatchInfo;
     }
 
     public static void main(String[] args) {
@@ -79,18 +68,11 @@ public class mainapp extends Application {
             RobotMatch rm = new RobotMatch();
             int lineCount = 0;
             int robotNumber = 0;
-            int highGoalsScored = 0;
-            int highGoalsShot = 0;
-            int defensesCrossed = 0;
-            int moatsCrossed = 0;
-            int drawbridgesCrossed = 0;
-            int portcullisCrossed = 0;
-            int lowBarsCrossed = 0;
-            int wallsCrossed = 0;
             String firstCompetition = "";
             String matchNumber = "";
             String allianceColor = "";
             String scouterName = "";
+            String phase = "auto";
 
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
@@ -116,6 +98,10 @@ public class mainapp extends Application {
 
 
                     switch (lineList[1]) {
+                        case STARTTELE:
+                            phase = "tele";
+                            break;
+
 
                         case DEFENSE:
 
@@ -127,6 +113,7 @@ public class mainapp extends Application {
                             if (lineList.length>2){
                                 rmd.subEvent = lineList[2];}
                     }
+                    rmd.phaseOfMatch = phase;
                    rm.getEventList().add(rmd);
                 }
                 lineCount++;
@@ -134,16 +121,10 @@ public class mainapp extends Application {
             r.robotMatch.add(rm);
             //robotData.add(new Robot(8976,7,3,72,7,3,5,"shooting",0));
             r.setRobotNumber(robotNumber);
-            r.setHighGoalsScored(highGoalsScored);
-            float shootingAccuracy = (float)highGoalsScored / (float)highGoalsShot * 100;
-            r.setShootingAccuracy(shootingAccuracy);
-            r.setDefensesCrossed(defensesCrossed);
-            r.setMoatsCrossed(moatsCrossed);
-            r.setDrawbridgesCrossed(drawbridgesCrossed);
-            r.setPortcullisCrossed(portcullisCrossed);
-            r.setLowBarsCrossed(lowBarsCrossed);
-            r.setWallsCrossed(wallsCrossed);
+
+
             robotData.add(r);
+            robotMatchInfo.add(rm);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -187,89 +168,8 @@ public class mainapp extends Application {
         }
     }
 
-    public void databaseExporter(File file){
-        try{
-            FileWriter writer = new FileWriter(file);
-            for (Robot r : this.getRobotData()){
-                String outputString = "robot";
-                outputString += "," + r.getRobotNumber();
-                outputString += "," + r.getHighGoalsScored();
-                outputString += "," + r.getLowGoalsScored();
-                outputString += "," + r.getDefensesCrossed();
-                outputString += "," + r.getAutoBP();
-                outputString += "," + r.getClimbed();
-                outputString += "," + r.getWins();
-                outputString += "," + r.getAreaOfFocus();
-                outputString += "," + r.getShootingAccuracy();
-
-                writer.write(outputString + "\n");
-            }
-            writer.close();
-        } catch (IOException e){
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Could not save data");
-            alert.setContentText("Could not save data to file:\n" + file.getPath());
-
-            alert.showAndWait();
-        }
 
 
-    }
-
-    public void databaseImportExporter(File file) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String line;
-
-
-            Robot r = new Robot();
-            int lineCount = 0;
-            int robotNumber = 0;
-            int highGoalsScored = 0;
-            int highGoalsShot = 0;
-            int lowGoalsScored = 0;
-            int defensesCrossed = 0;
-            int autoBP = 0;
-            int climbed = 0;
-            int wins = 0;
-            String areaOfFocus = "null";
-            int shootingAccuracy = 0;
-            int moatsCrossed = 0;
-            int drawbridgesCrossed = 0;
-            int portcullisCrossed = 0;
-            int lowBarsCrossed = 0;
-            int wallsCrossed = 0;
-
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                String[] lineList = line.split(",");
-
-                robotNumber = Integer.parseInt(lineList[2]);
-                highGoalsScored = Integer.parseInt(lineList[3]);
-                lowGoalsScored = Integer.parseInt(lineList[4]);
-                defensesCrossed = Integer.parseInt(lineList[5]);
-                autoBP = Integer.parseInt(lineList[6]);
-                climbed = Integer.parseInt(lineList[7]);
-                wins = Integer.parseInt(lineList[8]);
-                areaOfFocus = lineList[9];
-                shootingAccuracy = Integer.parseInt(lineList[10]);
-
-                r.setRobotNumber(robotNumber);
-                r.setHighGoalsScored(highGoalsScored);
-                r.setShootingAccuracy(shootingAccuracy);
-                r.setDefensesCrossed(defensesCrossed);
-                r.setLowGoalsScored(lowGoalsScored);
-                r.setAutoBP(autoBP);
-                r.setClimbed(climbed);
-                r.setWins(wins);
-                r.setAreaOfFocus(areaOfFocus);
-                robotData.add(r);
-
-
-            }
-        }catch (IOException e) {
-            e.printStackTrace();}}
 
     public void exportMysql(){
         db = new DataBase();
